@@ -26,9 +26,11 @@ export class WeatherService {
   private metar:string;
   private tar:string;
   private errorMessage:string;
+  private printingResponse:string
 
   constructor(private httpClient: HttpClient, private router:Router) {
     this.errorMessage='';
+    this.printingResponse='';
     this.currentAirport='';
     this.metar='';
     this.tar='';
@@ -63,7 +65,7 @@ export class WeatherService {
     this.weather.airport = airport;
     this.weather.metar = "";
     this.weather.tar ="";
-    this.errorMessage = '' ;
+    this.errorMessage = 'Access Data in progresse, wait please' ;
     this.emiterrorMessageSubjectSubject();
 
 
@@ -102,6 +104,9 @@ export class WeatherService {
               console.log('getWeatherInfoByaAirport PREV- value'+this.weather.airport + ' - ' + this.tar );
               this.weather.tar = this.tar;
               this.emitWeatherSubject();
+              this.errorMessage = '' ;
+              this.emiterrorMessageSubjectSubject();
+
               console.log('getWeatherInfoByaAirport PREV- recup exit');
             },
             (error) => {
@@ -121,5 +126,41 @@ export class WeatherService {
         console.log('getWeatherInfoByaAirport fin : ' + this.weather.airport + ' - ' + this.weather.metar+ ' - ' + this.weather.tar);
         this.emitWeatherSubject();
     return this.weather;
+  }
+
+  printString(info:string) {
+    console.log('printString- start info='+info);
+    this.printingResponse='';
+    this.errorMessage = 'Weather info is send to printer, please wait' ;
+    this.emiterrorMessageSubjectSubject();
+
+    this.httpClient
+      //.get<any>('http://localhost:8082/printString/'+ info,{responseType: 'text' as 'json'})
+      .post('http://localhost:8082/printString/',info,{responseType: 'text' as 'json'})
+      .subscribe((reponse) =>{
+          console.log('printString - recup info');
+          //this.printingResponse = reponse;
+          this.emitWeatherSubject();
+          this.errorMessage = 'Weather info is printed';
+          this.emiterrorMessageSubjectSubject();
+          console.log('printString - recup exit');
+        },
+        (error) => {
+          if (error.status === 404) {
+            console.log('Error during printing(404)');
+            this.errorMessage = 'Error during printing(404)';
+            this.emiterrorMessageSubjectSubject();
+          } else {
+            console.log('Technical error during printing : ' + error);
+            //this.router.navigate(['fourofour']);
+            this.errorMessage = ' Technical error during printing: ' + error.status + error.message;
+            this.emiterrorMessageSubjectSubject();
+            this.router.navigate(['ivao-error']);
+          }
+        }
+      );
+
+    this.emitWeatherSubject();
+    return this.printingResponse;
   }
 }

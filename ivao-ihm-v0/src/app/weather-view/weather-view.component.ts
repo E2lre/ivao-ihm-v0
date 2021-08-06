@@ -10,8 +10,8 @@ import {WeatherService} from '../services/weather.service';
 })
 export class WeatherViewComponent implements OnInit {
 
-
-
+  printRequest:string='';
+  printResponse:string='';
   weather: any;
   errorMessage:string = '';
   errorMessageSubject: Subscription = new Subscription;
@@ -40,5 +40,18 @@ export class WeatherViewComponent implements OnInit {
     this.weatherService.emitWeatherSubject();
     this.weatherService.emiterrorMessageSubjectSubject();
   }
-
+  onPrint(){
+    console.log('Print document and send message after printing');
+    this.weatherService.setErrorMessage('Weather info is send to printer');
+    this.weatherService.emiterrorMessageSubjectSubject();
+    this.printRequest = this.weather.airport + this.weather.metar + this.weather.tar
+    this. printResponse = this.weatherService.printString(this.printRequest);
+    if (this.printRequest==this. printResponse) {
+      this.weatherService.setErrorMessage('Weather info is printed');
+      this.weatherService.emiterrorMessageSubjectSubject();
+    }
+  }
+  onNewSearch(){
+    this.router.navigate(['weather']);
+  }
 }
