@@ -1,1 +1,59 @@
-<p>pilot-view works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2><b>Pilot : </b>{{pilot.userId}}<b> - Callsign : </b>{{pilot.callsign}}</h2>
+      <li class="list-group-item">
+        <h4>
+          <b>Flightplan : </b>
+          <h6>
+            <b>Aircraft : </b>{{pilot.aircraft}}
+          </h6>
+          <h6>
+            <b>Departure aerodrome : </b>{{pilot.departureAerodrome}}
+          </h6>
+          <h6>
+            <b>Cruising level : </b>{{pilot.cruisingLevel}}
+          </h6>
+          <h6>
+            <b>Destination aerodrome : </b>{{pilot.destinationAerodrome}}
+          </h6>
+          <h6>
+            <b>Departure time : </b>{{pilot.departureTime}}
+          </h6>
+          <h6>
+            <b>Route : </b>{{pilot.route}}
+          </h6>
+          <h6>
+            <b>Persons on board : </b>{{pilot.personOnBoard}}
+          </h6>
+        </h4>
+        <!--<h4>
+          <b>ATIS : {{pilot.atis}}</b>
+        </h4>-->
+        <h4>
+          <b>On Ground : </b>{{pilot.onGround}}
+        </h4>
+        <h4>
+          <b>FOB(Fuel On Board KG) : </b>
+          <input type="text" class="form-control" placeholder="fob"[(ngModel)]="fob">
+        </h4>
+        <h4>
+          <b>ZFW (Zero Fuel Weight KG) : </b>
+          <input type="text" class="form-control" placeholder="zfw"[(ngModel)]="zfw">
+        </h4>
+        <h4>
+          <b>TOW(Take Off Fuel KG) : </b>
+          <input type="text" class="form-control" placeholder="tow"[(ngModel)]="tow">
+        </h4>
+        <h4>
+          <b>PAX number (Pax = Passenger) : </b>
+          <input type="text" class="form-control" placeholder="paxNumber"[(ngModel)]="paxNumber">
+        </h4>
+      </li>
+      <div class="form-group has-error">
+        <label class="control-label" >{{errorMessage}}</label>
+      </div>
+      <button class="btn btn-primary" (click)="onPrint()">Print</button>&nbsp;<button class="btn btn-primary" (click)="onNewSearch()">New search</button>
+    </div>
+  </div>
+</div>

@@ -65,7 +65,7 @@ export class WeatherService {
     this.weather.airport = airport;
     this.weather.metar = "";
     this.weather.tar ="";
-    this.errorMessage = 'Access Data in progresse, wait please' ;
+    this.errorMessage = 'Access Data in progress, wait please' ;
     this.emiterrorMessageSubjectSubject();
 
 

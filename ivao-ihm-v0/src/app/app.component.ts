@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ivao-ihm-v0';
+  title = 'IVAO Consultaion V0' ;
 }

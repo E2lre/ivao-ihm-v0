@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {WeatherService} from "../services/weather.service";
 import {Router} from "@angular/router";
+import {PilotService} from "../services/pilote.service";
 
 @Component({
   selector: 'app-pilot',
@@ -9,15 +9,15 @@ import {Router} from "@angular/router";
 })
 export class PilotComponent implements OnInit {
   userId:string ='';
-  constructor(private weatherService:WeatherService,private router:Router) { }
+  constructor(private pilotService:PilotService,private router:Router) { }
 
-  ngOnInit(): void {
-  }
   onViewPilot(){
     console.log('Go to pilot info : '+this.userId);
- /*   this.weatherService.setCurrentAirport(this.airport);
-    this.weatherService.getWeatherInfoByaAirport(this.weatherService.getCurrentAirport());
-    this.weatherService.emitWeatherSubject();*/
+    this.pilotService.setCurrentUserId(this.userId);
+    this.pilotService.getPilotInfoByUserId(this.pilotService.getCurrentUserId());
+    this.pilotService.emitPilotSubject();
     this.router.navigate(['pilot-view']);
+  }
+  ngOnInit(): void {
   }
 }
