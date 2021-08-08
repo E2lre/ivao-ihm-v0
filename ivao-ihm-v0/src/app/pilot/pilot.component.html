@@ -6,9 +6,13 @@
         <h4>
           <b>User Id : </b>
           <input type="text" class="form-control" placeholder="UserID"[(ngModel)]="userId"> <!-- [(ngModel)]="airport">-->
+          <h6><span class="help-block">enter an existing user id</span> </h6>
         </h4>
       </li>
-      <button class="btn btn-primary" (click)="onViewPilot()">View Pilot</button>
+      <div class="form-group has-error">
+        <label class="control-label" >{{errorMessage}}</label>
+      </div>
     </div>
+    <button class="btn btn-primary" (click)="onViewPilot()">View Pilot</button>
   </div>
 </div>

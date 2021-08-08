@@ -1,1 +1,19 @@
-<p>atc-view works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2><b>Pilot : </b>{{atc.userId}}<b> - Callsign : </b>{{atc.callsign}}</h2>
+      <li class="list-group-item">
+        <h4>
+          <b>Frequency : </b>{{atc.frequency}}
+        </h4>
+        <h4>
+          <b>ATIS : </b>{{atc.atis}}
+        </h4>
+      </li>
+      <div class="form-group has-error">
+        <label class="control-label" >{{errorMessage}}</label>
+      </div>
+      <button class="btn btn-primary" (click)="onPrint()">Print</button>&nbsp;<button class="btn btn-primary" (click)="onNewSearch()">New search</button>
+    </div>
+  </div>
+</div>

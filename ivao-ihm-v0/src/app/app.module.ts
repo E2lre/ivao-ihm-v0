@@ -15,6 +15,7 @@ import { PilotViewComponent } from './pilot-view/pilot-view.component';
 import { AtcComponent } from './atc/atc.component';
 import { AtcViewComponent } from './atc-view/atc-view.component';
 import {PilotService} from "./services/pilote.service";
+import {AtcService} from "./services/atc.service";
 
 
 const appRoutes: Routes = [
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     WeatherService,
-    PilotService
+    PilotService,
+    AtcService
   ],
   bootstrap: [AppComponent]
 })

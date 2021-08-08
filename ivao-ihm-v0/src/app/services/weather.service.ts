@@ -3,6 +3,8 @@ import {Subject} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {HttpClientModule} from '@angular/common/http';
 import {Router} from "@angular/router";
+import {AtcService} from "./atc.service";
+import {PilotService} from "./pilote.service";
 
 
 export interface WheatherInterface {
@@ -28,7 +30,7 @@ export class WeatherService {
   private errorMessage:string;
   private printingResponse:string
 
-  constructor(private httpClient: HttpClient, private router:Router) {
+  constructor(private httpClient: HttpClient, private router:Router,private atcService:AtcService,private pilotService:PilotService) {
     this.errorMessage='';
     this.printingResponse='';
     this.currentAirport='';
@@ -143,6 +145,10 @@ export class WeatherService {
           this.emitWeatherSubject();
           this.errorMessage = 'Weather info is printed';
           this.emiterrorMessageSubjectSubject();
+          this.pilotService.setErrorMessage(this.errorMessage);
+          this.pilotService.emiterrorMessageSubjectSubject();
+          this.atcService.setErrorMessage(this.errorMessage);
+          this.atcService.emiterrorMessageSubjectSubject();
           console.log('printString - recup exit');
         },
         (error) => {
@@ -150,16 +156,24 @@ export class WeatherService {
             console.log('Error during printing(404)');
             this.errorMessage = 'Error during printing(404)';
             this.emiterrorMessageSubjectSubject();
+            this.pilotService.setErrorMessage(this.errorMessage);
+            this.pilotService.emiterrorMessageSubjectSubject();
+            this.atcService.setErrorMessage(this.errorMessage);
+            this.atcService.emiterrorMessageSubjectSubject();
           } else {
             console.log('Technical error during printing : ' + error);
             //this.router.navigate(['fourofour']);
             this.errorMessage = ' Technical error during printing: ' + error.status + error.message;
             this.emiterrorMessageSubjectSubject();
+            this.pilotService.setErrorMessage(this.errorMessage);
+            this.pilotService.emiterrorMessageSubjectSubject();
+            this.atcService.setErrorMessage(this.errorMessage);
+            this.atcService.emiterrorMessageSubjectSubject();
             this.router.navigate(['ivao-error']);
           }
         }
       );
-
+    this.atcService.emiterrorMessageSubjectSubject();
     this.emitWeatherSubject();
     return this.printingResponse;
   }
