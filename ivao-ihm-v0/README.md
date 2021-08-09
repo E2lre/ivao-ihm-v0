@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.2.
 
 ## Introduction
-IVAO Consult is used to consult and print IVAO Weather, pilot and ATC informations from IVAO Web Site
+IVAO Consult is used to consult and print IVAO Weather, pilot and ATC informations from IVAO Web Site (https://wiki.ivao.aero/en/home/devops/api/documentation-v2)
 * for Weather informations (observations and prévisions), airport id is required
 * for Pilot informations, pilot user id is required. Those informations can be completed before printing
 * for ATC informations, act user id is required.
