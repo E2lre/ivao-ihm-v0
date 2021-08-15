@@ -57,10 +57,13 @@ export class AtcService {
   private printingResponse: string;
 
   private currentuserid: string;
+  private currentcallsign: string;
+
   constructor(private httpClient: HttpClient, private router: Router) {
     this.errorMessage = '';
     this.printingResponse = '';
     this.currentuserid = '';
+    this.currentcallsign = '';
   }
   emitAtcSubject(){
     this.atcSubject.next(this.atc)
@@ -80,6 +83,12 @@ export class AtcService {
   }
   setCurrentUserId(currentuserid: string) {
     this.currentuserid = currentuserid;
+  }
+  getCurrentCallsign(){
+    return this.currentcallsign;
+  }
+  setCurrentCallsign(currentcallsign: string) {
+    this.currentcallsign = currentcallsign;
   }
   getAtc(){
     return this.atc;
@@ -115,6 +124,39 @@ export class AtcService {
         }
       );
     console.log('getAtcInfoByUserId'+this.atc.callsign );
+    return this.atc;
+  }
+  getAtcInfoByCallsign(callsign:string) {
+    console.log('getAtcInfoByCallsign- start id='+callsign);
+
+    this.errorMessage = 'Access Data in progress, wait please' ;
+    this.emiterrorMessageSubjectSubject();
+
+    this.httpClient
+      .get<any>('http://localhost:8082/ATCInfoCallsign/'+ callsign)
+      //.get<any>('http://localhost:8082/pilotInfoVID/'+ userId,{responseType: 'text' as 'json'})
+      .subscribe((reponse) =>{
+          console.log('getAtcInfoByCallsign - recup info');
+          //this.pilot = reponse;
+          this.whazuupAtc =reponse;
+          console.log('getAtcInfoByCallsign - reponse:'+reponse);
+          console.log('getAtcInfoByCallsign - recup ok');
+          console.log('getAtcInfoByCallsign - whazzup time'+this.whazuupAtc.time);
+          console.log('getAtcInfoByCallsign - whazzup callsign'+this.whazuupAtc.callsign);
+          this.getAtcInfoFromWhazuupPilot();
+          this.emitAtcSubject();
+          console.log('getAtcInfoByCallsign - recup exit');
+          this.errorMessage = '' ;
+          this.emiterrorMessageSubjectSubject();
+        },
+        (error) => {
+          console.log('getAtcInfoByCallsign Erreur ! : ' + error);
+          this.errorMessage = ' Technical error on getPilotInfoByUserId : '+ error.status + error.message ;
+          this.emiterrorMessageSubjectSubject();
+          this.router.navigate(['ivao-error']);
+        }
+      );
+    console.log('getAtcInfoByCallsign'+this.atc.callsign );
     return this.atc;
   }
 

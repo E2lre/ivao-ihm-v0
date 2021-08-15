@@ -33,11 +33,11 @@ export class AtcViewComponent implements OnInit {
     );
 
     this.atc = this.atcService.getAtc();
-    console.log("this.pilot.userId"+this.atc.userId+' this.pilot.callsign'+this.atc.callsign );
+    console.log('this.pilot.callsign'+this.atc.callsign );
     this.atc.userId = this.atcService.getCurrentUserId();
 
     this.atcService.emitAtcSubject();
-    console.log("this.pilot.userId"+this.atc.userId+' this.pilot.callsign'+this.atc.callsign );
+    console.log('this.pilot.callsign'+this.atc.callsign );
     this.atcService.emiterrorMessageSubjectSubject();
   }
   onPrint(){
@@ -45,7 +45,7 @@ export class AtcViewComponent implements OnInit {
     this.atcService.setErrorMessage('Weather info is send to printer');
     this.atcService.emiterrorMessageSubjectSubject();
 
-    this.printRequest = 'User id: ' + this.atc.userId + '\n'
+    this.printRequest = 'User id: ' + this.atc.userid + ' Callsign: '+ this.atc.callsign + '\n'
       +'Airport: ' + this.atc.airport + '\n'
       +'Frequency: ' + this.atc.frequency + '\n'
       +'ATIS: ' + this.atc.atis ;

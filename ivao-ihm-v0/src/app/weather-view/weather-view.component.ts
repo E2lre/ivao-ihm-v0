@@ -44,7 +44,10 @@ export class WeatherViewComponent implements OnInit {
     console.log('Print document and send message after printing');
     this.weatherService.setErrorMessage('Weather info is send to printer');
     this.weatherService.emiterrorMessageSubjectSubject();
-    this.printRequest = this.weather.airport + this.weather.metar + this.weather.tar
+
+    this.printRequest = 'Airport: ' + this.weather.airport + '\n'
+      +'METAR: ' + this.weather.metar + '\n'
+      +'TAF: ' + this.weather.tar +'\n';
     this. printResponse = this.weatherService.printString(this.printRequest);
     if (this.printRequest==this. printResponse) {
       this.weatherService.setErrorMessage('Weather info is printed');

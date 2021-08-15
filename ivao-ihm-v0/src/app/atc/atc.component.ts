@@ -10,7 +10,7 @@ import {Subscription} from "rxjs";
   styleUrls: ['./atc.component.scss']
 })
 export class AtcComponent implements OnInit {
-  userId:string ='';
+  callsign:string ='';
   errorMessage:string = '';
   errorMessageSubject: Subscription = new Subscription;
   constructor(private atcService:AtcService,private router:Router) { }
@@ -23,15 +23,16 @@ export class AtcComponent implements OnInit {
     );
   }
   onViewAtc(){
-    console.log('Go to pilot info : '+this.userId);
-    if (this.userId !='') {
-      this.atcService.setCurrentUserId(this.userId);
-      this.atcService.getAtcInfoByUserId(this.atcService.getCurrentUserId());
+    console.log('Go to pilot info : '+this.callsign);
+    if (this.callsign !='') {
+      //this.atcService.setCurrentUserId(this.callsign);
+      this.atcService.setCurrentCallsign(this.callsign);
+      this.atcService.getAtcInfoByCallsign(this.atcService.getCurrentCallsign());
       this.atcService.emitAtcSubject();
       this.router.navigate(['atc-view']);
       }
     else {
-      this.atcService.setErrorMessage('User id field can not be empty');
+      this.atcService.setErrorMessage('Callsign field can not be empty');
       this.atcService.emiterrorMessageSubjectSubject();
     }
   }
