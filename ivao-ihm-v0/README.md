@@ -23,7 +23,7 @@ This part is IHM in Angular for IVAO CONSULT
 ## Prerequis
 * IIS or nginx server
 * API REST ivao-ms-v0 (with java 11) must be up (see https://github.com/E2lre/ivao-ms-v0)
-* exceute   ng build --base-href "/ivao/" --prod
+* excecute   ng build --base-href "/ivao/" --prod
 
 ## Development server
 
@@ -36,6 +36,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+excecute   ng build --base-href "/ivao/" --prod
 
 ## Running unit tests
 
