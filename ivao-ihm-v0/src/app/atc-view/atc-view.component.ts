@@ -48,7 +48,8 @@ export class AtcViewComponent implements OnInit {
     this.printRequest = 'User id: ' + this.atc.userid + ' Callsign: '+ this.atc.callsign + '\n'
       +'Airport: ' + this.atc.airport + '\n'
       +'Frequency: ' + this.atc.frequency + '\n'
-      +'ATIS: ' + this.atc.atis ;
+      +'ATIS: ' + this.atc.atis
+      + '\f';
 
     this.printResponse = this.weatherService.printString(this.printRequest);
     this.weatherService.emitWeatherSubject();

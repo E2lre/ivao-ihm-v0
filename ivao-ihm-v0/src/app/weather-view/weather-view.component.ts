@@ -47,7 +47,8 @@ export class WeatherViewComponent implements OnInit {
 
     this.printRequest = 'Airport: ' + this.weather.airport + '\n'
       +'METAR: ' + this.weather.metar + '\n'
-      +'TAF: ' + this.weather.tar +'\n';
+      +'TAF: ' + this.weather.tar +'\n'
+      + '\f';
     this. printResponse = this.weatherService.printString(this.printRequest);
     if (this.printRequest==this. printResponse) {
       this.weatherService.setErrorMessage('Weather info is printed');

@@ -64,7 +64,8 @@ export class PilotViewComponent implements OnInit {
                         +'FOB: ' + this.pilot.fob + '\n'
                         +'ZFW: ' + this.pilot.zfw + '\n'
                         +'TOW: ' + this.pilot.tow + '\n'
-                        +'Pax Number: ' + this.pilot.paxNumber + '\n';
+                        +'Pax Number: ' + this.pilot.paxNumber + '\n'
+                        + '\f';
 
     //console.log('printRequest ' +this.printRequest);
 
